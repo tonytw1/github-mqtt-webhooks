@@ -10,10 +10,11 @@ import play.libs.Akka
 object MQTTService {
 
   private val host: String = Play.configuration.getString("mqtt.host").get
+  private val port: Int = Play.configuration.getInt("mqtt.port").get
   private val topic = Play.configuration.getString("mqtt.topic").get
 
   val pubsub: ActorRef = Akka.system.actorOf(Props(classOf[MqttPubSub], PSConfig(
-    brokerUrl = "tcp://" + host + ":1883"
+    brokerUrl = "tcp://" + host + ":" + port
   )))
 
   def publish(message: String) = {
