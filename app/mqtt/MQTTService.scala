@@ -1,11 +1,8 @@
 package mqtt
 
-import akka.actor.{Props, _}
-import com.sandinh.paho.akka.MqttPubSub
-import com.sandinh.paho.akka.MqttPubSub.{Publish, PSConfig}
+import org.fusesource.mqtt.client.{BlockingConnection, MQTT, QoS}
 import play.api.Play.current
 import play.api.{Logger, Play}
-import play.libs.Akka
 
 object MQTTService {
 
@@ -13,13 +10,15 @@ object MQTTService {
   private val port: Int = Play.configuration.getInt("mqtt.port").get
   private val topic = Play.configuration.getString("mqtt.topic").get
 
-  val pubsub: ActorRef = Akka.system.actorOf(Props(classOf[MqttPubSub], PSConfig(
-    brokerUrl = "tcp://" + host + ":" + port
-  )))
-
   def publish(message: String) = {
     Logger.info("Publishing to mqtt topic " + topic + ": " + message)
-    pubsub ! new Publish(topic, message.getBytes)
+
+    val mqtt: MQTT = new MQTT()
+    mqtt.setHost(host, port)
+    val connection: BlockingConnection = mqtt.blockingConnection
+    connection.connect
+    connection.publish(topic, message.getBytes, QoS.AT_MOST_ONCE, false)
+    connection.disconnect
   }
 
 }

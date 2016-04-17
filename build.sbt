@@ -16,7 +16,7 @@ packageSummary in Linux := "Github MQTT webhooks"
 
 packageDescription := "Convert Github webhooks to MQTT events"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
+libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.12"
 
 import com.typesafe.sbt.packager.archetypes.ServerLoader
 
