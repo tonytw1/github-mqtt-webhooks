@@ -1,8 +1,10 @@
 package mqtt
 
+import java.io.{FileInputStream, InputStream}
 import java.security.KeyStore
 import java.security.cert.{CertificateFactory, X509Certificate}
 import javax.net.ssl.{SSLContext, TrustManagerFactory}
+import java.io.File
 
 import org.fusesource.mqtt.client.{BlockingConnection, MQTT, QoS}
 import play.api.Play.current
@@ -28,7 +30,8 @@ object MQTTService {
 
     def sslContext(certPath: String): SSLContext = {
       val cf: CertificateFactory = CertificateFactory.getInstance("X.509")
-      val caCert: X509Certificate = cf.generateCertificate(getClass.getClassLoader.getResourceAsStream(certPath)).asInstanceOf[X509Certificate]
+      val asStream: InputStream = new FileInputStream(new File(certPath))
+      val caCert: X509Certificate = cf.generateCertificate(asStream).asInstanceOf[X509Certificate]
       val tmf: TrustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm)
       val ks: KeyStore = KeyStore.getInstance(KeyStore.getDefaultType)
       ks.load(null)
