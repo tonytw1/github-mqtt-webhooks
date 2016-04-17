@@ -6,8 +6,6 @@ lazy val `github-mqtt-webhooks` = (project in file(".")).enablePlugins(PlayScala
 
 scalaVersion := "2.11.7"
 
-libraryDependencies ++= Seq("com.sandinh" %% "paho-akka" % "1.2.0")
-
 libraryDependencies += specs2 % Test
 
 maintainer in Linux := "Tony McCrae <tony@eelpieconsulting.co.uk>"
