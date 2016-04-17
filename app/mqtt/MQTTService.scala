@@ -48,7 +48,7 @@ object MQTTService {
       mqtt
     } { c =>
       val mqtt: MQTT = new MQTT()
-      mqtt.setHost("tls://" + host, port)
+      mqtt.setHost("tls://" + host + ":" + port)
       mqtt.setSslContext(sslContext(c))
       mqtt
     }
