@@ -4,9 +4,12 @@ version := "1.0"
 
 lazy val `github-mqtt-webhooks` = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.12"
+
+resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 libraryDependencies += specs2 % Test
+
 
 maintainer in Linux := "Tony McCrae <tony@eelpieconsulting.co.uk>"
 
@@ -14,7 +17,7 @@ packageSummary in Linux := "Github MQTT webhooks"
 
 packageDescription := "Convert Github webhooks to MQTT events"
 
-libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.12"
+libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.14"
 
 import com.typesafe.sbt.packager.archetypes.ServerLoader
 
