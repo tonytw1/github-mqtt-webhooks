@@ -10,20 +10,13 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 libraryDependencies += specs2 % Test
 
-
-maintainer in Linux := "Tony McCrae <tony@eelpieconsulting.co.uk>"
-
-packageSummary in Linux := "Github MQTT webhooks"
-
-packageDescription := "Convert Github webhooks to MQTT events"
-
 libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.14"
 
-import com.typesafe.sbt.packager.archetypes.ServerLoader
-
-serverLoading in Debian:= ServerLoader.Systemd
+enablePlugins(DockerPlugin)
+dockerBaseImage := "openjdk:8-jre"
+dockerExposedPorts in Docker := Seq(9000)
 
 javaOptions in Universal ++= Seq(
   // -J params will be added as jvm parameters
-  "-J-Xmx256m"
+  "-J-XX:+UnlockExperimentalVMOptions", "-J-XX:+UseCGroupMemoryLimitForHeap", "-J-XX:MaxRAMFraction=1", "-J-XshowSettings:vm"
 )
