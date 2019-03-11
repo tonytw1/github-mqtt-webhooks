@@ -13,10 +13,5 @@ libraryDependencies += specs2 % Test
 libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.14"
 
 enablePlugins(DockerPlugin)
-dockerBaseImage := "openjdk:8-jre"
+dockerBaseImage := "openjdk:11-jre"
 dockerExposedPorts in Docker := Seq(9000)
-
-javaOptions in Universal ++= Seq(
-  // -J params will be added as jvm parameters
-  "-J-XX:+UnlockExperimentalVMOptions", "-J-XX:+UseCGroupMemoryLimitForHeap", "-J-XX:MaxRAMFraction=1", "-J-XshowSettings:vm"
-)
