@@ -40,7 +40,16 @@ object MQTTService {
       sslContext
     }
 
-    caCert.fold {
+    val nonEmptyCaCert = caCert.flatMap { ca =>
+      if (ca.trim.nonEmpty) {
+        Some(ca.trim)
+      } else {
+        None
+      }
+
+    }
+
+    nonEmptyCaCert.fold {
       val mqtt = new MQTT()
       mqtt.setHost(host, port)
       mqtt
