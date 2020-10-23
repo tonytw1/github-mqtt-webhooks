@@ -46,7 +46,6 @@ object MQTTService {
       } else {
         None
       }
-
     }
 
     nonEmptyCaCert.fold {
