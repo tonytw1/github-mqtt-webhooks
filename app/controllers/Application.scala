@@ -1,15 +1,18 @@
 package controllers
 
+import javax.inject.Inject
 import mqtt.MQTTService
 import play.api.Logger
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{BodyParsers, Action, Controller}
+import play.api.mvc.{Action, BodyParsers, Controller}
 
 import scala.concurrent.Future
 
-object Application extends Controller {
+class Application @Inject() (mqttService: MQTTService) extends Controller {
 
-  val mqttService = MQTTService
+  def home = Action.async { request =>
+    Future.successful(Ok(Json.toJson("ok")))
+  }
 
   def webhook = Action.async(BodyParsers.parse.json) { request =>
     val message: JsValue = request.body

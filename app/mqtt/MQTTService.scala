@@ -3,18 +3,18 @@ package mqtt
 import java.io.{File, FileInputStream}
 import java.security.KeyStore
 import java.security.cert.{CertificateFactory, X509Certificate}
+
+import javax.inject.Inject
 import javax.net.ssl.{SSLContext, TrustManagerFactory}
-
 import org.fusesource.mqtt.client.{MQTT, QoS}
-import play.api.Play.current
-import play.api.{Logger, Play}
+import play.api.{Configuration, Logger}
 
-object MQTTService {
+class MQTTService @Inject() (configuration: Configuration) {
 
-  private val host = Play.configuration.getString("mqtt.host").get
-  private val port = Play.configuration.getInt("mqtt.port").get
-  private val topic = Play.configuration.getString("mqtt.topic").get
-  private val caCert = Play.configuration.getString("mqtt.tls.cacert")
+  private val host = configuration.getString("mqtt.host").get
+  private val port = configuration.getInt("mqtt.port").get
+  private val topic = configuration.getString("mqtt.topic").get
+  private val caCert = configuration.getString("mqtt.tls.cacert")
 
   def publish(message: String) = {
     Logger.info("Publishing to mqtt topic " + host + ":" + port + " / " + topic + ": " + message)

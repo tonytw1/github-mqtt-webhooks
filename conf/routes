@@ -1,1 +1,2 @@
+GET         /                       controllers.Application.home
 POST        /webhook                controllers.Application.webhook

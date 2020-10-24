@@ -6,8 +6,9 @@ lazy val `github-mqtt-webhooks` = (project in file(".")).enablePlugins(PlayScala
 
 scalaVersion := "2.11.12"
 
-resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
+libraryDependencies += guice
 libraryDependencies += specs2 % Test
 
 libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.14"
