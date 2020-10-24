@@ -1,0 +1,7 @@
+steps:
+  - name: 'gcr.io/$PROJECT_ID/scala-sbt'
+    args: ['clean', 'test', 'docker:publishLocal']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['tag', 'github-mqtt-webhooks:1.0', 'eu.gcr.io/$PROJECT_ID/github-mqtt-webhooks:latest']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'eu.gcr.io/$PROJECT_ID/github-mqtt-webhooks:latest']
