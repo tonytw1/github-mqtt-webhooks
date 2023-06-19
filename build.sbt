@@ -13,4 +13,5 @@ libraryDependencies += "org.fusesource.mqtt-client" % "mqtt-client" % "1.14"
 
 enablePlugins(DockerPlugin)
 dockerBaseImage := "openjdk:11-jre"
-dockerExposedPorts in Docker := Seq(9000)
+dockerExposedPorts := Seq(9000)
+Universal / mappings += file("conf/logback.xml") -> "conf/logback.xml"
