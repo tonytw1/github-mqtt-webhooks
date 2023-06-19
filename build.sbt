@@ -4,9 +4,7 @@ version := "1.0"
 
 lazy val `github-mqtt-webhooks` = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.12.18"
-
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+scalaVersion := "2.13.11"
 
 libraryDependencies += guice
 libraryDependencies += specs2 % Test
